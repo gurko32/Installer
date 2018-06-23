@@ -43,27 +43,48 @@
 
 			// MODULE CHOOSER
 
-			HBox moduleBox = new HBox(true, 1);
+			//HBox moduleBox = new HBox(true, 1);
 
 			Gtk.TreeView tree = new Gtk.TreeView();
 
-			moduleBox.PackStart(tree);
+			//moduleBox.PackStart(tree);
 
 			Gtk.TreeViewColumn moduleColumn = new Gtk.TreeViewColumn();
 			moduleColumn.Title = "Module";
+			Gtk.CellRendererText moduleColumnCell = new Gtk.CellRendererText();
+            moduleColumn.PackStart(moduleColumnCell, true);
 
-			Gtk.TreeViewColumn includeColumn = new Gtk.TreeViewColumn();
-			includeColumn.Title = "Include";
+            Gtk.TreeViewColumn includeColumn = new Gtk.TreeViewColumn();
+            includeColumn.Title = "Include";
+			Gtk.CellRendererText includeColumnCell = new Gtk.CellRendererText();
+			includeColumn.PackStart(includeColumnCell, true);
+
 
 			// Add the columns to the TreeView
 			tree.AppendColumn(moduleColumn);
 			tree.AppendColumn(includeColumn);
 
-			AppendPage(moduleBox);
-			SetPageTitle(box, "Choose The Modules");
-			SetPageType(box, AssistantPageType.Content);
+			Gtk.ListStore moduleList = new Gtk.ListStore(typeof(string), typeof(string));
+            
+			tree.Model = moduleList;
+				
 
-			//ESKI YAZI SEC SAYFASI
+
+            AppendPage(tree);
+   
+			moduleList.AppendValues("Garbage","DEDELER" );
+			moduleColumn.AddAttribute(moduleColumnCell, "text", 0);
+			includeColumn.AddAttribute(includeColumnCell, "text", 1);
+
+
+
+
+
+
+			//SetPageTitle(moduleBox, "Choose The Modules");
+            //SetPageType(moduleBox, AssistantPageType.Content);
+
+            //ESKI YAZI SEC SAYFASI
 			//HBox box = new HBox(false, 6);
 			//box.PackStart(new Label("Enter some text: "), false, false, 6);
 			//Entry entry = new Entry();
@@ -116,7 +137,9 @@
 				if (zipPath.EndsWith(".zip"))
 				{
 					FastZip fastZip = new FastZip();
-					fastZip.ExtractZip(zipPath, extractPath.Replace(".zip", ""), null);
+					extractPath = extractPath.Replace(".zip", "");
+
+					fastZip.ExtractZip(zipPath, extractPath, null);
 
 					SetPageComplete(GetNthPage(CurrentPage), true);
 
@@ -125,9 +148,11 @@
 				{
 					Stream inStream = File.OpenRead(zipPath);
 					Stream gzipStream = new GZipInputStream(inStream);
+					extractPath = extractPath.Replace(".tar.gz", "");
+
 
 					TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
-					tarArchive.ExtractContents(extractPath.Replace(".tar.gz", ""));
+					tarArchive.ExtractContents(extractPath);
 					tarArchive.Close();
 
 					inStream.Close();

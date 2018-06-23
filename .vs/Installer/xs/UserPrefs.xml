@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{831694AD-BAE2-448D-B422-EB96D3402ABB}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Installer/Program.cs">
     <Files>
-      <File FileName="Installer/Program.cs" Line="62" Column="4" />
+      <File FileName="Installer/Program.cs" Line="60" Column="27" />
       <File FileName="Installer/gtk-gui/MainWindow.cs" Line="35" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>

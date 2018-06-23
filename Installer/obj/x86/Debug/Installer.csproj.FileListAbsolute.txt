@@ -5,3 +5,10 @@
 /home/gurko32/Projects/Installer/Installer/obj/x86/Debug/Installer.exe
 /home/gurko32/Projects/Installer/Installer/obj/x86/Debug/Installer.pdb
 /home/gurko32/Projects/Installer/Installer/bin/Debug/ICSharpCode.SharpZipLib.dll
+/home/gurko32/Installer/Installer/bin/Debug/Installer.exe
+/home/gurko32/Installer/Installer/bin/Debug/Installer.pdb
+/home/gurko32/Installer/Installer/bin/Debug/ICSharpCode.SharpZipLib.dll
+/home/gurko32/Installer/Installer/obj/x86/Debug/Installer.csprojResolveAssemblyReference.cache
+/home/gurko32/Installer/Installer/obj/x86/Debug/Installer.csproj.CoreCompileInputs.cache
+/home/gurko32/Installer/Installer/obj/x86/Debug/Installer.exe
+/home/gurko32/Installer/Installer/obj/x86/Debug/Installer.pdb
