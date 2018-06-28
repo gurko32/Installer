@@ -5,16 +5,17 @@
 	using System.IO;
 	using System.IO.Compression;
 	using Gtk;
-	using ICSharpCode.SharpZipLib.Zip;
-	using ICSharpCode.SharpZipLib.Tar;
-	using ICSharpCode.SharpZipLib.GZip;
-
+	//using ICSharpCode.SharpZipLib.Zip;
+	//using ICSharpCode.SharpZipLib.Tar;
+	//using ICSharpCode.SharpZipLib.GZip;
+    
 
 
 	public class SampleAssistant : Assistant
 	{
-
 		ProgressBar progress_bar;
+
+		string extractPath;
 
 		public SampleAssistant()
 		{
@@ -56,7 +57,7 @@
 
             Gtk.TreeViewColumn includeColumn = new Gtk.TreeViewColumn();
             includeColumn.Title = "Include";
-			Gtk.CellRendererText includeColumnCell = new Gtk.CellRendererText();
+			Gtk.CellRendererToggle includeColumnCell = new Gtk.CellRendererToggle();
 			includeColumn.PackStart(includeColumnCell, true);
 
 
@@ -64,7 +65,7 @@
 			tree.AppendColumn(moduleColumn);
 			tree.AppendColumn(includeColumn);
 
-			Gtk.ListStore moduleList = new Gtk.ListStore(typeof(string), typeof(string));
+			Gtk.ListStore moduleList = new Gtk.ListStore(typeof(string), typeof(bool));
             
 			tree.Model = moduleList;
 				
@@ -77,7 +78,10 @@
 			includeColumn.AddAttribute(includeColumnCell, "text", 1);
 
 
+            // Done Done Tum dosyaları ekle
 
+            
+            
 
 
 
@@ -129,17 +133,26 @@
 		protected void Deneme(object o, EventArgs args)
 		{
 			string zipPath = ((FileChooserButton)o).Filename;
-			string extractPath = ((FileChooserButton)o).Filename;
+			extractPath = ((FileChooserButton)o).Filename;
 			//((FileChooserButton)o).CurrentFolderUri.Substring(7);
 
 			try
 			{
 				if (zipPath.EndsWith(".zip"))
 				{
-					FastZip fastZip = new FastZip();
-					extractPath = extractPath.Replace(".zip", "");
 
-					fastZip.ExtractZip(zipPath, extractPath, null);
+					//Stream inStream = File.OpenRead(zipPath);
+                    //Stream zipStream = new ZipInputStream(inStream);
+                    //extractPath = extractPath.Replace(".zip", "");
+
+		             
+     
+					FastZip fastZip = new FastZip();
+                    extractPath = extractPath.Replace(".zip", "");
+
+
+
+					fastZip.ExtractZip(zipPath, "/home/gurko32/ZipDenemeleri/WTF", null);
 
 					SetPageComplete(GetNthPage(CurrentPage), true);
 
